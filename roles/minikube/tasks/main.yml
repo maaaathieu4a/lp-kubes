@@ -1,0 +1,61 @@
+#https://kubernetes.io/fr/docs/tasks/tools/install-minikube/
+#TODO  docker driver is getting deprecated, switch to cri-o
+---
+- name: install and configure docker
+    - name: install docker driver
+      apt:
+        name: docker.io
+        state: present
+    
+    #TODO  hardcoded user, use some vars instead!
+    - name: add our main user in docker group
+      user:
+        name: mathieu
+        groups: 'docker'
+        append: 'yes'
+    
+    - name: start and enable docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+  become: yes
+
+- name: install minikube
+    - name: download and install minikube
+      apt:
+        deb: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+        state: present
+      become: yes
+    
+    - name: ship systemd service
+      copy:
+        src: files/minikube.service
+        dest: /etc/systemd/system/
+    
+    - name: enable and start minikube
+      systemd:
+        name: minikube
+        state: started
+        daemon_reload: yes
+        enabled: yes
+  become: yes
+
+- name: make docker default driver
+  command: minikube config set driver docker
+
+#only if not present
+- name: download kubectl
+  command: minikube kubectl -- get po -A
+
+#TODO user is hardcoded again
+#TODO version is hardcoded too
+- name: create a symlink pointing to kubectl exe
+  file:
+    src: /home/mathieu/.minikube/cache/linux/v1.19.4/kubectl
+    dest: /usr/local/bin/kubectl
+    owner: mathieu
+    group: mathieu
+    state: link
+  become: yes
+

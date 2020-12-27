@@ -1,0 +1,5 @@
+---
+- name: a quick test
+  debug:
+    msg: Hello, world!
+

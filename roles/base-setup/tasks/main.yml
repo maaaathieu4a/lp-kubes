@@ -1,0 +1,41 @@
+---
+- name: turn this image into a more minimal ubuntu server
+  block:  
+    - name: remove tons of useless things
+      apt:
+        name: 
+          - ubuntu-desktop
+          - snapd
+          - unity 
+          - gnome-shell 
+          - lightdm
+          - unattended-upgrades
+        state: absent
+        autoremove: yes
+    
+    - name: upgrade to latest packages 
+      apt:
+        upgrade: safe
+        update_cache: yes
+        cache_valid_time: 3600
+    
+    - name: install some basic utilities
+      apt:
+        name: 
+          - xz-utils
+          - screenfetch
+          - w3m
+          - net-tools
+        state: present
+    
+    - name: Remove dependencies that are no longer required
+      apt:
+        autoremove: yes
+
+    - name: make sure sshd is enabled
+      systemd:
+        name: sshd
+        enabled: yes
+        state: started
+
+  become: yes

@@ -1,0 +1,15 @@
+[Unit]
+Description=Start Minikube automatically
+After=docker.service
+
+[Service]
+RemainAfterExit=yes
+Type=oneshot
+ExecStart=/usr/bin/minikube start --driver=docker
+ExecStop=/usr/bin/minikube stop
+User=mathieu
+Group=mathieu
+
+
+[Install]
+WantedBy=multi-user.target
