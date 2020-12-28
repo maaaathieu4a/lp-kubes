@@ -4,7 +4,7 @@ After=docker.service
 
 [Service]
 RemainAfterExit=yes
-Type=oneshot
+Type=simple
 ExecStart=/usr/bin/minikube start --driver=docker
 ExecStop=/usr/bin/minikube stop
 User=mathieu

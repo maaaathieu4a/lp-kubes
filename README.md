@@ -1,13 +1,29 @@
-# homelab
-a repository for scripts and such related to devices on my home network
+lattepanda minikube
+===================
 
-## Lattepanda
-The first piece here, I have the 2gb version bought on kickstarter.
+A simple learning project
 
-In order to avoid any quirks and keep better compatibility with modern tools,
-I decided to install a 64bit OS version which because of the 32bit UEFI is not straightforward.
+# Goals
+- practice using ansible
+- check out kubernetes
+- check out pi-hole
+- dust off my lattepanda
 
-translate it into "normal" command and configure kubernetes with driver=none for this to work?
 
+# get the lattepanda running
+The first challenge to avoid compiling too many things manually was to install a 64bit image on it. 
+The bootloader is 32bits and this was a bit more annoying than expected.
+Fortunately someone else did the work already and I simply installed ubuntu from TODO
 
+# configure it with ansible
+Once the image was in place I wanted to turn it into more of a server image, 
+cleaning it up a bit before installing docker and minikube
+
+# run some pod with pi-hole
+I thought a pi-hole could be a great idea as it's not too simple.
+
+I followed this tutorial to get it up and running.
 https://medium.com/@subtlepseudonym/pi-hole-on-kubernetes-87fc8cdeeb2e
+And simply added the yaml file to be deployed with ansible too.
+
+

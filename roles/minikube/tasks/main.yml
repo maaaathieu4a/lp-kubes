@@ -2,6 +2,7 @@
 #TODO  docker driver is getting deprecated, switch to cri-o
 ---
 - name: install and configure docker
+  block:
     - name: install docker driver
       apt:
         name: docker.io
@@ -22,6 +23,7 @@
   become: yes
 
 - name: install minikube
+  block:
     - name: download and install minikube
       apt:
         deb: https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
@@ -44,7 +46,6 @@
 - name: make docker default driver
   command: minikube config set driver docker
 
-#only if not present
 - name: download kubectl
   command: minikube kubectl -- get po -A
 

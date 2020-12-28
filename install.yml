@@ -3,4 +3,4 @@
   roles:
   - base-setup
   - minikube
-  - minikube-deploy
+    #  - minikube-deploy
