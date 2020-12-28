@@ -13,7 +13,7 @@ A simple learning project
 # get the lattepanda running
 The first challenge to avoid compiling too many things manually was to install a 64bit image on it. 
 The bootloader is 32bits and this was a bit more annoying than expected.
-Fortunately someone else did the work already and I simply installed ubuntu from TODO
+Fortunately someone else did the work already and I simply installed ubuntu from [Linuxium isos](http://www.linuxium.com.au/isos)
 
 # configure it with ansible
 Once the image was in place I wanted to turn it into more of a server image, 
@@ -26,4 +26,12 @@ I followed this tutorial to get it up and running.
 https://medium.com/@subtlepseudonym/pi-hole-on-kubernetes-87fc8cdeeb2e
 And simply added the yaml file to be deployed with ansible too.
 
+
+# TODOs
+- configure and test pihole
+- try the ansible kubernete module
+- have immutable playbooks to use kubernetes
+
+resources : 
+https://medium.com/@adilsonbna/ansible-k8s-for-the-laziest-person-part-2-a0fea80c490c
 

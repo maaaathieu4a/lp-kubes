@@ -1,12 +1,20 @@
-#https://medium.com/@adilsonbna/ansible-k8s-for-the-laziest-person-part-2-a0fea80c490c
 ---
-- name: install dependencies
+- name: install dependencies for kubectl module
   apt:
    name:
      - python3
      - python3-yaml
      - openshift-imagebuilder
+   state: present
   become: yes 
 
-    #ship pi-hole.yaml
-    #kubectl create -f pi-hole.yaml
+#TODO kubectl module exists in community, try it out
+#instead of the manual action here
+- name: ship pi-hole pod
+  copy:
+    src: files/pihole.yaml 
+    dest: /home/mathieu/pihole.yaml
+
+- name: create pi-hole pod
+  shell: kubectl create -f pihole.yaml
+  when: pihole_exists
